@@ -1,0 +1,84 @@
+hue = 225
+saturation = 73%
+
+a
+    text-decoration none
+    color hsl(hue, saturation, 40%)
+
+body
+    font-family 'Fira Sans'
+    margin 0
+    // detect phones/tablets - TODO: make this detect phones/tablets better
+    @media (max-width: 1000px)
+        font-size 2em
+
+// restyles buttons to look like links
+.as-link
+    background none !important
+    color inherit
+    border none
+    padding 0 !important 
+    font inherit
+    cursor pointer
+
+h1, h2
+    margin 0
+    font-weight 500
+
+nav
+    display flex
+    justify-content left
+    
+    > *
+        margin-right 1em
+
+    for num in (1..6)
+        :nth-child({num})
+            color hsl(hue, saturation, 40% + (num * 5)%)
+
+    padding-bottom 0.5em
+
+.revision
+    margin-bottom 1em
+    .timestamp
+        font-style italic
+        margin-bottom 0.5em
+    .added
+        color green
+    .removed
+        color red
+        text-decoration line-through
+
+    .category-added::before
+        color limegreen
+        content "＋"
+    .category-removed::before
+        color red
+        content "− "
+
+.page-list
+    list-style none
+    padding 0
+    li
+        display flex
+        justify-content space-between
+    .timestamp
+        font-style italic
+
+.categories 
+    > *
+        margin-left 0.3em
+    form
+        display inline
+
+.editor
+    width 100%
+    resize vertical
+    border 1px solid gray
+
+.editor-submit
+    border 1px solid gray
+    padding 0.4em
+
+main
+    padding 1em

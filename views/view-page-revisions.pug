@@ -1,0 +1,24 @@
+extends layout.pug
+
+block content
+    each revision in revisions
+        .revision
+            .timestamp= revision.timestamp
+            pre.diff
+                code
+                    //- only display diffs if there has actually been change
+                    if revision.diff.filter(change => change[0] !== 0).length > 0
+                        each change in revision.diff
+                            - const changetype = change[0]
+                            - const cls = changetype == 1 ? "added" : changetype == -1 ? "removed" : "nochange"
+                            span(class=cls)= change[1]
+            if revision.categoriesAdded.length + revision.categoriesRemoved.length > 0
+                span categories:
+                each category in revision.categoriesAdded
+                    .category-added= category
+                each category in revision.categoriesRemoved 
+                    .category-removed= category
+
+block nav-items
+    +nav-item("view", `/view/${name}`)
+    +nav-item("edit", `/edit/${name}`)

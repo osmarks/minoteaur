@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+  ul.page-list
+    each page in pages
+      li.page-link
+        a(href=`view/${page.name}`)= page.name
+        span.timestamp= page.timestamp

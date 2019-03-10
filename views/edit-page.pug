@@ -1,0 +1,10 @@
+extends layout.pug
+
+block nav-items
+    +nav-item("view", `/view/${name}`)
+    +nav-item("revisions", `/revisions/${name}`)
+
+block content
+    form(action=`/edit/${name}`, method="POST")
+        textarea.editor(rows=40, name="content")= content
+        input.editor-submit(type="submit", value="Submit")

@@ -1,0 +1,19 @@
+extends layout.pug
+
+block content
+    p!= content
+    .categories
+        span categories:
+        each category in categories
+            a.category(href=`/category/${category}`)= category
+            form(action=`/remove-category/${name}`, method="POST")
+                input(type="hidden", value=category, name="category")
+                input(type="submit", value="⨉", class="as-link")
+            
+        form(action=`/add-category/${name}`, method="POST")
+            input(type="text", placeholder="new category", name="newCategory")
+            input(type="submit", value="＋", class="as-link")
+
+block nav-items
+    +nav-item("revisions", `/revisions/${name}`)
+    +nav-item("edit", `/edit/${name}`)

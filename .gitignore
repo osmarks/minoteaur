@@ -1,0 +1,4 @@
+node_modules
+.env
+dropdb.sh
+static/style.css

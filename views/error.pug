@@ -1,0 +1,6 @@
+extends layout.pug
+
+block content
+    if error
+        each line in error.split("\n")
+            div= line

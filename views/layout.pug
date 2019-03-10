@@ -1,0 +1,18 @@
+mixin nav-item(text, url)
+  a(href=url)= text
+
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/static/style.css")
+    link(rel="stylesheet", href="/static/highlightjs-theme.css")
+    block head
+  body
+    main
+      nav
+        +nav-item("index", "/")
+        +nav-item("random", "/random")
+        +nav-item("search", "/search")
+        block nav-items
+      h1= title
+      block content
