@@ -28,3 +28,4 @@ The app will then initialize its databases and run a webserver on port 8030. If 
 * Make revision logs nicer and less spammed.
 * Make editor work nicely on mobile.
 * Theming.
+* File upload (e.g. for embedding images).

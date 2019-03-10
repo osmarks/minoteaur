@@ -30,6 +30,7 @@ const errorHandler = (err, req, res, next) => {
     if (res.headersSent) {
         return next(err)
     }
+    // If in "production", do not show whole error stack
     sendError(res, "Internal Server Error", 500, process.env.NODE_ENV === "production" ? err : err.stack)
 }
 
@@ -54,6 +55,7 @@ const md = new MarkdownIt({
         highlight: (str, lang) => {
             if (lang && hljs.getLanguage(lang)) {
                 try {
+                    // Apply `hljs` class to <pre> so that backgrounds work with dark themes
                     return `<pre class="hljs"><code>${hljs.highlight(lang, str).value}</code></pre>`;
                 } catch (_) {}
             }
@@ -81,11 +83,13 @@ app.get("/view/:name", async (req, res) => {
     })
 })
 
+// Used by category add button
 app.post("/add-category/:name", async (req, res) => {
     const name = req.params.name
     const page = await getPage(name)
     const newCategory = slugify(req.body.newCategory)
     const newCategories = page.categories
+    // Require that categories not be the empty string (TODO: also possibly block weird unicode)
     if (newCategory === "") {
         sendError(res, "Invalid Category Name", 400, "The category's name must not be empty.")
     }
@@ -96,11 +100,13 @@ app.post("/add-category/:name", async (req, res) => {
     res.redirect(`/view/${name}`)
 })
 
+// Used by category remove buttons
 app.post("/remove-category/:name", async (req, res) => {
     const name = req.params.name
     const page = await getPage(name)
     const category = req.body.category
     const newCategories = page.categories
+    // Remove chosen category from categories list if present
     const index = newCategories.indexOf(category)
     if (index > -1) {
         newCategories.splice(index, 1)
@@ -141,6 +147,7 @@ app.post("/edit/:name", async (req, res) => {
     res.redirect(`/view/${name}`)
 })
 
+// Returns all items which are in xs but not ys
 const difference = (xs, ys) => xs.filter(x => !ys.includes(x))
 
 app.get("/revisions/:name", async (req, res) => {
