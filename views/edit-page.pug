@@ -4,7 +4,9 @@ block nav-items
     +nav-item("view", `/view/${name}`)
     +nav-item("revisions", `/revisions/${name}`)
 
+block head
+
 block content
     form(action=`/edit/${name}`, method="POST")
-        textarea.editor(rows=40, name="content")= content
+        textarea.editor(rows=40, name="content", id="markdown-editor")= content
         input.editor-submit(type="submit", value="Submit")

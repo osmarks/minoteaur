@@ -135,8 +135,7 @@ app.get("/edit/:name", async (req, res) => {
 })
 
 app.post("/edit/:name", async (req, res) => {
-    const name = req.params.name
-    redirectToSlug(name, res)
+    const name = slugify(req.params.name)
     const currentPage = await getPage(name)
     const newContent = req.body.content
     // Only add revision if there was actual change

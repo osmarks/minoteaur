@@ -10,7 +10,8 @@ Written in Typescript using Express.js as a web framework with PostgreSQL for da
 3. Create a `.env` file containing `DB=[connection string for database]`
 4. Run `index.ts` (I recommend `ts-node`)
  
-The app will then initialize its databases and run a webserver on port 8030. If you plan to host this publicly, I suggest using a reverse proxy with some sort of authentication mechanism.
+The app will then initialize its databases and run a webserver on port 8030. 
+If you plan to expose this to the Internet, I suggest using a reverse proxy with some sort of authentication mechanism, especially as it allows HTML embedding in Markdown.
 
 ## Features
 
@@ -29,3 +30,4 @@ The app will then initialize its databases and run a webserver on port 8030. If 
 * Make editor work nicely on mobile.
 * Theming.
 * File upload (e.g. for embedding images).
+* Nicer Markdown editor.
